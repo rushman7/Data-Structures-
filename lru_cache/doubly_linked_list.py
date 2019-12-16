@@ -128,5 +128,3 @@ class DoublyLinkedList:
             cur_node = cur_node.next
 
         return max_node
-
-# https://lambdaschool.zoom.us/j/312222766
