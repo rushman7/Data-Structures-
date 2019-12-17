@@ -23,22 +23,42 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        # if key in self.cache:
-        #     self.dll(key)
-        #     return f'Cached...{self.cache[key]}'
-        
-        # if len(self.cache) == self.limit:
+        if key in self.cache:
+            node = self.cache[key]
+            value = node.value[1]
+            self.storage.move_to_front(node)
+            print(f"Head: {self.storage.head.value} Tail: {self.storage.tail.value}")
+            return value
 
-
+        else:
+            return None
     """
+    If the cache is already at max capacity before this 
+    entry is added, then the oldest entry in the cache 
+    needs to be removed to make room. 
+
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
-    entry in the cache. If the cache is already at max capacity
-    before this entry is added, then the oldest entry in the
-    cache needs to be removed to make room. Additionally, in the
+    entry in the cache. 
+    
+    Additionally, in the
     case that the key already exists in the cache, we simply
     want to overwrite the old value associated with the key with
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        if key in self.cache:
+            node = self.cache[key]
+            node.value = (key, value)
+            self.storage.move_to_front(node)
+
+        if len(self.cache) == self.limit:
+            self.storage.remove_from_tail()
+            del self.cache[self.storage.tail.value[0]]
+        
+        self.storage.add_to_head((key, value))
+        self.cache[key] = self.storage.head
+        print(f"Set: {self.cache}")
+        print(f"Head: {self.storage.head.value} Tail: {self.storage.tail.value}")
+        
+        
