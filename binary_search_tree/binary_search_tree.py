@@ -1,3 +1,8 @@
+# import sys
+# sys.path.append('../queue_and_stack')
+# from dll_queue import Queue
+# from dll_stack import Stack
+
 class BinarySearchTree:
     def __init__(self, value):
         self.value = value
@@ -61,9 +66,15 @@ class BinarySearchTree:
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
-    # Hint:  Use a recursive, depth first traversal
+    # Hint: Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node.left is not None: # check if left exists
+            self.in_order_print(node.left) # go down left branch
+
+        print(node.value) # print the current node before going right
+
+        if node.right is not None: #c heck if right exists after left
+            self.in_order_print(node.right) # go down right branch
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
@@ -85,3 +96,16 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+
+bst = BinarySearchTree(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
+
+bst.in_order_print(bst)
