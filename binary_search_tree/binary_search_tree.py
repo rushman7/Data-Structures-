@@ -6,18 +6,18 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        node = BinarySearchTree(value)
+        node = BinarySearchTree(value) # creating new node with value
         print(f"Values-- Current:{value} Node:{self.value}")
-        if value < self.value:
-            if self.left == None:
-                self.left = node
+        if value < self.value: # if value is less than current node
+            if self.left == None: # if left of current node is none
+                self.left = node # set left to current node
             else:
-                self.left.insert(value)
-        elif value > self.value:
-            if self.right == None:
-                self.right = node
+                self.left.insert(value) # recursion on left side with value
+        elif value > self.value: # if value is greater than current node
+            if self.right == None: # if right of current node is none
+                self.right = node # set right to current node
             else:
-                self.right.insert(value)
+                self.right.insert(value) # recursion on right side with value
 
 
     # Return True if the tree contains the value
