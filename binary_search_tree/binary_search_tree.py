@@ -1,7 +1,7 @@
-# import sys
-# sys.path.append('../queue_and_stack')
-# from dll_queue import Queue
-# from dll_stack import Stack
+import sys
+sys.path.append('..\queue_and_stack')
+from dll_queue import Queue
+from dll_stack import Stack
 
 class BinarySearchTree:
     def __init__(self, value):
@@ -79,7 +79,16 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        queue = Queue() # initialize Queue
+        queue.enqueue(node) # add node to queue
+        while queue.len() > 0:
+            remove = queue.dequeue() # remove end of queue node                         
+            print(remove.value) 
+            if remove.left is not None: 
+                queue.enqueue(remove.left) # add the left of removed node to queue if it exists
+            if remove.right is not None:
+                queue.enqueue(remove.right) # add the right of removed node to queue if it exists
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -108,4 +117,4 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-bst.in_order_print(bst)
+bst.bft_print(bst)
