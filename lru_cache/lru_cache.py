@@ -27,7 +27,6 @@ class LRUCache:
             node = self.cache[key]
             value = node.value[1]
             self.storage.move_to_front(node)
-            # print(f"GET:{self.storage.head.value}-{self.storage.head.next.value}-{self.storage.tail.value}")
             return value
 
         else:
@@ -51,16 +50,13 @@ class LRUCache:
             node = self.cache[key]
             node.value = (key, value)
             self.storage.move_to_front(node)
-            # print(f"OVER-WRITE:{self.storage.head.value}-{self.storage.head.next.value}-{self.storage.tail.value}")
 
         else:
             if len(self.cache) == self.limit:
                 del self.cache[self.storage.tail.value[0]]
                 self.storage.remove_from_tail()
-                # print(f"DELETE:{self.storage.head.value}-{self.storage.head.next.value}-{self.storage.tail.value}")
 
             self.storage.add_to_head((key, value))
             self.cache[key] = self.storage.head
-            # print(f"SET:{self.storage.head.value}-{self.storage.head.next.value}-{self.storage.tail.value}")
         
         
